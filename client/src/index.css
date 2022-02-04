@@ -11,3 +11,62 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+.mainNavDiv {
+  position: fixed;
+   top: 0;
+   z-index: 100;
+  padding-top: 10px;
+  padding-bottom: 30px;
+  width: 100%;
+  background-color: rgb(110, 110, 110);
+  box-shadow: 0 2px 4px 0 #292929;
+}
+
+.navBarUl {
+  position: absolute;
+  left: 10%;
+  list-style-type: none;
+  font-size: medium;
+  font-weight: 700;
+  color: #0f0f0f;
+}
+
+.navBarLink {
+  display: inline;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  text-decoration: none;
+  color: rgb(27, 27, 27);
+}
+
+.createList {
+  padding-top: 100px;
+}
+
+.Task {
+  padding-top: 2px;
+  padding-bottom: 3px
+}
+
+.HomePage {
+  padding-top: 100px
+}
+
+.Profile {
+  padding-top: 90px
+}
+
+.Login {
+  padding-top: 10%;
+}
+
+.LoginForm {
+  max-width: 200px;
+  margin: 0 auto;
+  /* border-color: #0f0f0f; */
+  /* border-width: 10px; */
+  /* position: fixed; */
+}
