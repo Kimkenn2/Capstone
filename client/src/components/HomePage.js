@@ -2,12 +2,12 @@ import React, {useState} from 'react';
 // import {useHistory} from "react-router-dom"
 import NavBar from './NavBar';
 
-function HomePage({}) {
+function HomePage({setCurrentUser}) {
     
    
     return(
         <div>
-            <NavBar />
+            <NavBar setCurrentUser={setCurrentUser}/>
 
         </div>
     )
