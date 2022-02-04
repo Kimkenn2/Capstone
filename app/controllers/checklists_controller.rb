@@ -23,6 +23,6 @@ class ChecklistsController < ApplicationController
 
 
     def checklist_params
-        params.permit(:title, :creator_id)
+        params.permit(:title, :user_id)
     end
 end

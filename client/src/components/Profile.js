@@ -1,9 +1,10 @@
 import NavBar from "./NavBar"
-import React, {useState} from "react"
+import React, {useState, useEffect} from "react"
 import CreateTask from "./CreateTask"
+import Checklist from "./Checklist"
 
 
-function Profile({setChecklistTitle, checklistTitle, currentUser}) {
+function Profile({setChecklistTitle, checklistTitle, currentUser, setCurrentUser}) {
     const [checklistForm, setChecklistForm] = useState(false)
     const [numberofCheckLists, setNumberofCheckLists] = useState(2)
     const [currentTaskTitle, setCurrentTaskTitle] = useState("")
@@ -13,12 +14,14 @@ function Profile({setChecklistTitle, checklistTitle, currentUser}) {
     const [subTaskToggle, setSubTaskToggle] = useState(false)
     const [currentListOfSubTasks, setCurrentListOfSubTasks] = useState([])
     const [returnedSubmittedTask, setReturnedSubmittedTask] = useState()
+    const [yourChecklists, setYourChecklists] = useState([])
+    const [checklistsFetched, setChecklistsFetched] = useState(false)
     
 
     function newChecklistClick() {
         const data = {
             title: checklistTitle,
-            creator_id: currentUser.id
+            user_id: currentUser.id
         }
         if (checklistTitle == "") {
             window.alert("Title cannot be blank")
@@ -113,22 +116,60 @@ function Profile({setChecklistTitle, checklistTitle, currentUser}) {
         })
         .then(resp => resp.json())
         .then(subTask => console.log(subTask))
-        .then(fetch(`http://localhost:3000/checklists/${currentChecklist.id}/tasks`)
+        .then( () => fetch(`http://localhost:3000/checklists/${currentChecklist.id}/tasks`)
         .then(resp => resp.json())
         .then(tasks => setListOfTasks(tasks)))
         .then(() => setCurrentListOfSubTasks([]))
 
     }
-        
+
+    function renderWelcome() {
+        if(currentUser == undefined) {
+            console.log("no user")
+        } else {
+            // console.log(currentUser.username)
+            return(<div>Welcome, {currentUser.username}</div>)
+        }
+    }
+    function loadChecklists() {
+        if (currentUser == undefined) {
+            console.log("no current user")
+        } else if(checklistsFetched == false) {  
+            fetch(`http://localhost:3000/users/${currentUser.id}/checklists`)
+            .then(resp => resp.json())
+            .then(checklists => setYourChecklists(checklists))
+            .then(setChecklistsFetched(true))
+    }
+        }
+
+    
+
+    const renderChecklists = yourChecklists ? yourChecklists.map(list => (
+        <Checklist list={list}/>
+    ))  : undefined
+    // const renderChecklists = () => {
+    //     if (yourChecklists == false) {
+    //         console.log(undefined)
+    //     } else {
+    //         console.log(yourChecklists)
+    //         // yourChecklists.map(list => console.log(list))
+    //     }
+    // }
 
     function profileOrForm() {
         if (checklistForm == false) {
             return(
                 <>
-                    {/* <div>Welcome, {currentUser.name}</div> */}
+                    {loadChecklists()}
+                    {renderWelcome()}
             <button onClick={() => console.log(currentUser)}>Log CurrentUser</button>
             <input placeholder='Insert Checklist Title' onChange={(e) => setChecklistTitle(e.target.value)}></input>
             <button onClick={() => newChecklistClick()}>+</button>
+
+            <div>
+                Your Checklists:
+                {renderChecklists}
+            </div>
                 </>
             )
         } else {
@@ -161,7 +202,7 @@ function Profile({setChecklistTitle, checklistTitle, currentUser}) {
 
     return(
         <div className="Profile">
-            <NavBar />
+            <NavBar setCurrentUser={setCurrentUser}/>
             {profileOrForm()}
         </div>
     )
