@@ -33,7 +33,7 @@ function handleLogin(e) {
 }
     return (
         <div>
-            <NavBar setCurrentUser={setCurrentUser}/>
+            <NavBar setCurrentUser={setCurrentUser} currentUser={currentUser}/>
             <div className="Login">
                 <form className="LoginForm">
                     <input placeholder="Username" onChange={(e) => setUsername(e.target.value)}></input>

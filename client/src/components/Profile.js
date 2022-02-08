@@ -16,12 +16,14 @@ function Profile({setChecklistTitle, checklistTitle, currentUser, setCurrentUser
     const [returnedSubmittedTask, setReturnedSubmittedTask] = useState()
     const [yourChecklists, setYourChecklists] = useState([])
     const [checklistsFetched, setChecklistsFetched] = useState(false)
+    const [listPublic, setListPublic] = useState(false)
     
 
     function newChecklistClick() {
         const data = {
             title: checklistTitle,
-            user_id: currentUser.id
+            user_id: currentUser.id,
+            public: false
         }
         if (checklistTitle == "") {
             window.alert("Title cannot be blank")
@@ -145,7 +147,7 @@ function Profile({setChecklistTitle, checklistTitle, currentUser, setCurrentUser
     
 
     const renderChecklists = yourChecklists ? yourChecklists.map(list => (
-        <Checklist list={list}/>
+        <Checklist list={list} currentUser={currentUser}/>
     ))  : undefined
     // const renderChecklists = () => {
     //     if (yourChecklists == false) {
@@ -156,13 +158,32 @@ function Profile({setChecklistTitle, checklistTitle, currentUser, setCurrentUser
     //     }
     // }
 
+        function onComplete() {
+            window.location.reload()
+        }
+
+        function handlePublic() {
+            setListPublic(!listPublic)
+            const data = {
+                public: !listPublic
+            }
+            console.log(!listPublic)
+            fetch(`http://localhost:3000/checklists/${currentChecklist.id}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-type": "application/json",
+                    Accepts: "application/json",
+                },
+                body: JSON.stringify(data),
+            })
+        }
     function profileOrForm() {
         if (checklistForm == false) {
             return(
                 <>
                     {loadChecklists()}
                     {renderWelcome()}
-            <button onClick={() => console.log(currentUser)}>Log CurrentUser</button>
+            {/* <button onClick={() => console.log(currentUser)}>Log CurrentUser</button> */}
             <input placeholder='Insert Checklist Title' onChange={(e) => setChecklistTitle(e.target.value)}></input>
             <button onClick={() => newChecklistClick()}>+</button>
 
@@ -195,6 +216,11 @@ function Profile({setChecklistTitle, checklistTitle, currentUser, setCurrentUser
                     <label>Tasks:</label>
                 {renderCurrentChecklist}
                 </ul>
+                <div>
+                    Public
+                    <input type={"checkbox"} onClick={() => handlePublic()}></input>
+                    <button onClick={() => onComplete()}>Complete</button>
+                </div>
                 </>
             )
         }
@@ -202,7 +228,7 @@ function Profile({setChecklistTitle, checklistTitle, currentUser, setCurrentUser
 
     return(
         <div className="Profile">
-            <NavBar setCurrentUser={setCurrentUser}/>
+            <NavBar setCurrentUser={setCurrentUser} currentUser={currentUser}/>
             {profileOrForm()}
         </div>
     )

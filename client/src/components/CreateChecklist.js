@@ -2,7 +2,7 @@ import NavBar from "./NavBar"
 import CreateTask from "./CreateTask"
 import React, {useState} from "react"
 
-function CreateChecklist({setCurrentUser}) {
+function CreateChecklist({setCurrentUser, currentUser}) {
     const [numberofCheckLists, setNumberofCheckLists] = useState(2)
     const [formState, setFormState] = useState({
         title: "",
@@ -20,7 +20,7 @@ function CreateChecklist({setCurrentUser}) {
 
     return (
         <div>
-            <NavBar setCurrentUser={setCurrentUser}/>
+            <NavBar setCurrentUser={setCurrentUser} currentUser={currentUser}/>
             <ul className="createList">
             <div>Number of Tasks: {numberofCheckLists-1}</div>
                 {renderTask()}

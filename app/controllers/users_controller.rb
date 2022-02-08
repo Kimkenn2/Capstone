@@ -25,6 +25,17 @@ class UsersController < ApplicationController
       checklists = Checklist.where(user_id: params[:id])
       render json: checklists
     end
+
+    def showCompletedTasks
+      completedtasks = CompletedTask.where(user_id: params[:id])
+      render json: completedtasks
+    end
+
+    def showallpublic
+      checklistpublic = Checklist.where(public: true)
+      checklists = checklistpublic.where(user_id: params[:id])
+      render json: checklists
+    end
   
     # POST /users
     def create

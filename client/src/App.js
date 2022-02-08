@@ -5,11 +5,17 @@ import './App.css';
 import CreateChecklist from './components/CreateChecklist';
 import Profile from './components/Profile';
 import Login from './components/Login'
+import Signup from './components/Signup';
+import ViewProfile from './components/ViewProfile';
+import UserBrowser from './components/UserBrowser';
+import FullChecklistPreview from './components/FullChecklistPreview';
+import BrowseChecklists from './components/BrowseChecklists';
 
 function App() {
   const [checklistTitle, setChecklistTitle] = useState("")
   const [currentUser, setCurrentUser] = useState(undefined)
   const [authenticated, setAuthenticated] = useState(false);
+  const [allUsers, setAllUsers] = useState([])
 
   // useEffect(() => {
   //   fetch("http://localhost:3000/users")
@@ -29,7 +35,10 @@ function App() {
       } else {
         setAuthenticated(true);
       }
-    });
+    })
+    fetch("http://localhost:3000/users")
+    .then(resp => resp.json())
+    .then(users => setAllUsers(users))
   }, []);
 
   return (
@@ -38,8 +47,13 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage checklistTitle={checklistTitle} setChecklistTitle={setChecklistTitle} currentUser={currentUser} setCurrentUser={setCurrentUser}/>} />
           <Route path="/Login" element={<Login currentUser={currentUser} setCurrentUser={setCurrentUser}/>} />
-          <Route path="/CreateList" element={<CreateChecklist setCurrentUser={setCurrentUser}/>} />
+          <Route path="/CreateList" element={<CreateChecklist setCurrentUser={setCurrentUser} currentUser={currentUser}/>} />
           <Route path="/Profile" element={<Profile checklistTitle={checklistTitle} setChecklistTitle={setChecklistTitle} currentUser={currentUser} setCurrentUser={setCurrentUser}/>} />
+          <Route path="/ViewProfile/:id" element={<ViewProfile currentUser={currentUser} allUsers={allUsers} setCurrentUser={setCurrentUser}/>} />
+          <Route path="/Signup" element={<Signup currentUser={currentUser} setCurrentUser={setCurrentUser}/>} />
+          <Route path="/UserBrowser" element={<UserBrowser currentUser={currentUser} setCurrentUser={setCurrentUser} allUsers={allUsers}/>} />
+          <Route path="/ChecklistBrowser" element={<BrowseChecklists currentUser={currentUser} setCurrentUser={setCurrentUser}/>} />
+          <Route path="/ViewChecklist/:id" element={<FullChecklistPreview currentUser={currentUser} setCurrentUser={setCurrentUser}/>} />
         </Routes>
       </BrowserRouter>
     </div>
