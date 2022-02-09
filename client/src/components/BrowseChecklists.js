@@ -7,12 +7,32 @@ function BrowseChecklists({currentUser, setCurrentUser}) {
     const [lists, setLists] = useState([])
     // const [renderLists, setRenderLists] = useState()
     const [search, setSearch] = useState("")
+    const [followsRendered, setFollowsRendered] = useState([])
+    const [usersFollows, setUsersFollows] = useState(false)
+    const [loaded, setLoaded] = useState(false)
 
     useEffect(() => (
         fetch("http://localhost:3000/checklistspublic")
         .then(resp => resp.json())
         .then(data => setLists(data))
     ),[])
+
+        function checkFollows() {
+            if (currentUser == undefined){
+            console.log("no user yet")
+            } else if (loaded==false ){
+                fetch(`http://localhost:3000/users/${currentUser.id}/checklistIFollow`)
+                .then(resp => resp.json())
+                .then(data => {setFollowsRendered(data)
+                })
+
+                fetch(`http://localhost:3000/users/${currentUser.id}/checklist_follows`)
+                .then(resp => resp.json())
+                .then(data => setUsersFollows(data))
+
+                setLoaded(true)
+            }
+        }
 
     function searchedLists() {
         if (search == ""){
@@ -23,11 +43,12 @@ function BrowseChecklists({currentUser, setCurrentUser}) {
     }
 
     const renderLists = searchedLists().map(list => (
-        <ChecklistPreview checklist={list} currentUser={currentUser}/>
+        <ChecklistPreview setUsersFollows={setUsersFollows} checklist={list} currentUser={currentUser} followsRendered={followsRendered} setFollowsRendered={setFollowsRendered} usersFollows={usersFollows} loaded={loaded} setLoaded={setLoaded}/>
     ))
 
     return(
         <div>
+            {checkFollows()}
             <NavBar setCurrentUser={setCurrentUser} currentUser={currentUser}/>
             <div className="BrowseChecklists">
                 <input placeholder="Search Lists" onChange={(e) => setSearch(e.target.value)}></input>

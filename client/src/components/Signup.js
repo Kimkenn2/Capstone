@@ -16,9 +16,12 @@ function Signup ({setCurrentUser, currentUser}) {
             username: username,
             password: password
         }
-        if(allUsers.find(u => u.username == username).username == username) {
-            window.alert("Username Already Taken")
-        } else {
+        if(allUsers.find(u => u.username == username)) {
+            if(allUsers.find(u => u.username == username).username == username){
+                window.alert("Username Already Taken")
+            }
+        }
+        else {
             fetch("http://localhost:3000/users", {
             method: "POST",
             headers:{'Content-Type':'application/json'},
@@ -41,6 +44,8 @@ function Signup ({setCurrentUser, currentUser}) {
                     <input placeholder="Password" onChange={(e) => setPassword(e.target.value)}></input>
                     <button onClick={(e) => handleSignup(e)}>Sign Up</button>
                 </form>
+                    <button onClick={() => console.log(allUsers)}></button>
+                    <button onClick={() => console.log(allUsers[0].username)}></button>
             </div>
         </div>
     )

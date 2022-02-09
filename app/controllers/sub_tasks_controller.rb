@@ -9,6 +9,15 @@ class SubTasksController < ApplicationController
         render json: subtask, status: 202
     end
 
+    def show
+        render json: SubTask.find(params[:id])
+    end
+
+    def update
+        subtask = SubTask.find(params[:id])
+        subtask.update(subtask_params)
+    end
+
 
     def subtask_params
         params.permit(:title, :task_index, :task_id, :checklist_id)

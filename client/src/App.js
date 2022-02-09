@@ -10,6 +10,7 @@ import ViewProfile from './components/ViewProfile';
 import UserBrowser from './components/UserBrowser';
 import FullChecklistPreview from './components/FullChecklistPreview';
 import BrowseChecklists from './components/BrowseChecklists';
+import EditChecklist from './components/EditChecklist';
 
 function App() {
   const [checklistTitle, setChecklistTitle] = useState("")
@@ -54,6 +55,7 @@ function App() {
           <Route path="/UserBrowser" element={<UserBrowser currentUser={currentUser} setCurrentUser={setCurrentUser} allUsers={allUsers}/>} />
           <Route path="/ChecklistBrowser" element={<BrowseChecklists currentUser={currentUser} setCurrentUser={setCurrentUser}/>} />
           <Route path="/ViewChecklist/:id" element={<FullChecklistPreview currentUser={currentUser} setCurrentUser={setCurrentUser}/>} />
+          <Route path="editchecklist/:id" element={<EditChecklist currentUser={currentUser} setCurrentUser={setCurrentUser}/>} />
         </Routes>
       </BrowserRouter>
     </div>

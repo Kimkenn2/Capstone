@@ -1,7 +1,7 @@
 import React, {useState} from "react"
 import ProfileTask from "./ProfileTask"
 
-function Checklist({list, currentUser}) {
+function Checklist({list, currentUser, owned}) {
     const [view, setView] = useState(false)
 
     function handleViewCancel() {
@@ -13,7 +13,7 @@ function Checklist({list, currentUser}) {
     return (
         <div className="Checklist">
             <div>{list.title}</div>
-            <button onClick={() => console.log(list)}>Edit</button>
+            {owned ? <button onClick={() => window.location.assign(`http://localhost:4000/editchecklist/${list.id}`)}>Edit</button> : undefined }
             {view ? <button onClick={() => handleViewCancel()}>Cancel</button> : <button onClick={() => handleViewCancel()}>View</button>}
             {view ? <div>
                 {tasks}

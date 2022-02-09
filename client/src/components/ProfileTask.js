@@ -73,7 +73,7 @@ function ProfileTask({task, currentUser}) {
             {toggleSubTasks ? <ul>
                {renderSubTasks}
             </ul> : undefined}
-            <button onClick={() => console.log(currentTask.sub_tasks)}></button>
+            {/* <button onClick={() => console.log(currentTask.sub_tasks)}></button> */}
         </div>
     )
 }

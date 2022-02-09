@@ -17,7 +17,9 @@ function Profile({setChecklistTitle, checklistTitle, currentUser, setCurrentUser
     const [yourChecklists, setYourChecklists] = useState([])
     const [checklistsFetched, setChecklistsFetched] = useState(false)
     const [listPublic, setListPublic] = useState(false)
-    
+    const [didLoadFollowedChecklists, setDidLoadFollowedChecklists] = useState(false)
+    const [followedChecklistsIds, setFollowedChecklistsIds] = useState([])
+    const [followedChecklists, setFollowedChecklists] = useState([])
 
     function newChecklistClick() {
         const data = {
@@ -147,16 +149,8 @@ function Profile({setChecklistTitle, checklistTitle, currentUser, setCurrentUser
     
 
     const renderChecklists = yourChecklists ? yourChecklists.map(list => (
-        <Checklist list={list} currentUser={currentUser}/>
+        <Checklist list={list} currentUser={currentUser} owned={true}/>
     ))  : undefined
-    // const renderChecklists = () => {
-    //     if (yourChecklists == false) {
-    //         console.log(undefined)
-    //     } else {
-    //         console.log(yourChecklists)
-    //         // yourChecklists.map(list => console.log(list))
-    //     }
-    // }
 
         function onComplete() {
             window.location.reload()
@@ -177,19 +171,40 @@ function Profile({setChecklistTitle, checklistTitle, currentUser, setCurrentUser
                 body: JSON.stringify(data),
             })
         }
+        function loadFollowedChecklists() {
+            if(currentUser == undefined){
+                console.log("no user yet")
+            } else if (didLoadFollowedChecklists == false) {
+                fetch(`http://localhost:3000/users/${currentUser.id}/checklistIFollow`)
+                .then(resp => resp.json())
+                .then(data => setFollowedChecklists(data))
+                .then(setDidLoadFollowedChecklists(true))
+            }
+        }
+
+        const renderFollowedChecklists = followedChecklists ? followedChecklists.map(list => (
+            <Checklist list={list} currentUser={currentUser} owned={false}/>
+        )) : undefined
     function profileOrForm() {
         if (checklistForm == false) {
             return(
                 <>
                     {loadChecklists()}
                     {renderWelcome()}
+                    {loadFollowedChecklists()}
             {/* <button onClick={() => console.log(currentUser)}>Log CurrentUser</button> */}
             <input placeholder='Insert Checklist Title' onChange={(e) => setChecklistTitle(e.target.value)}></input>
             <button onClick={() => newChecklistClick()}>+</button>
 
             <div>
-                Your Checklists:
+                <h2>Your Checklists:</h2>
                 {renderChecklists}
+            </div>
+            <div>
+                <h2>Checklists You Follow:</h2>
+                {renderFollowedChecklists}
+                <button onClick={() => console.log(followedChecklists)}></button>
+                
             </div>
                 </>
             )

@@ -30,7 +30,6 @@ function NavBar({setCurrentUser, currentUser}) {
             </div>
             <ul className="navBarUl">
                 <Link to ="/Login" className="navBarLink">Login</Link>
-                <Link to= "/login" onClick={() => handleLogout()} className="navBarLink">Logout</Link>
                 <Link to="/Signup" className="navBarLink">Sign up</Link>
                 <Link to="/UserBrowser" className="navBarLink">Browse Users</Link>
                 <Link to="/ChecklistBrowser" className="navBarLink">Browse Lists</Link>

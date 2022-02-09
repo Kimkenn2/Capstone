@@ -36,6 +36,24 @@ class UsersController < ApplicationController
       checklists = checklistpublic.where(user_id: params[:id])
       render json: checklists
     end
+
+    def showchecklistfollows
+      checklistfollows = ChecklistFollow.where(user_id: params[:id])
+      render json: checklistfollows
+    end
+
+    def checklistIFollow
+      # checklistfollows = User.find(params[:id]).checklist_follows.pluck(:checklist_id).each do |cf|
+      #   singleall = Checklist.where(id: cf).as_json
+      #   @all = [@all.clone, singleall]
+      # end
+      # # checklistfollows = User.find(params[:id]).checklist_follows.each do |cf|
+      # # Checklist.where(id: cf.checklist_id)
+      # # end
+      # render json: @all, Serializer: ChecklistSerializer
+      followedchecklists = User.find(params[:id]).followed_checklists
+      render json: followedchecklists
+    end
   
     # POST /users
     def create
