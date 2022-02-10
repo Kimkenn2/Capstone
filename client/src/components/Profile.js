@@ -20,6 +20,7 @@ function Profile({setChecklistTitle, checklistTitle, currentUser, setCurrentUser
     const [didLoadFollowedChecklists, setDidLoadFollowedChecklists] = useState(false)
     const [followedChecklistsIds, setFollowedChecklistsIds] = useState([])
     const [followedChecklists, setFollowedChecklists] = useState([])
+    const [usersFollows, setUsersFollows] = useState(false)
 
     function newChecklistClick(e) {
         e.preventDefault()
@@ -150,7 +151,7 @@ function Profile({setChecklistTitle, checklistTitle, currentUser, setCurrentUser
     
 
     const renderChecklists = yourChecklists ? yourChecklists.map(list => (
-        <Checklist list={list} currentUser={currentUser} owned={true}/>
+        <Checklist list={list} currentUser={currentUser} owned={true} usersFollows={usersFollows}/>
     ))  : undefined
 
         function onComplete() {
@@ -180,11 +181,16 @@ function Profile({setChecklistTitle, checklistTitle, currentUser, setCurrentUser
                 .then(resp => resp.json())
                 .then(data => setFollowedChecklists(data))
                 .then(setDidLoadFollowedChecklists(true))
+
+                fetch(`http://localhost:3000/users/${currentUser.id}/checklist_follows`)
+                .then(resp => resp.json())
+                .then(data => setUsersFollows(data))
+                .then(() => console.log(usersFollows))
             }
         }
 
         const renderFollowedChecklists = followedChecklists ? followedChecklists.map(list => (
-            <Checklist list={list} currentUser={currentUser} owned={false}/>
+            <Checklist list={list} currentUser={currentUser} owned={false} usersFollows={usersFollows} setDidLoadFollowedChecklists={setDidLoadFollowedChecklists}/>
         )) : undefined
     function profileOrForm() {
         if (checklistForm == false) {

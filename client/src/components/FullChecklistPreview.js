@@ -88,8 +88,8 @@ function FullChecklistPreview({setCurrentUser, currentUser}) {
             {currentChecklist ? <div>
                 <NavBar setCurrentUser={setCurrentUser} currentUser={currentUser}/>
                 <div className="FullChecklistPreview">
-            {loaded ? (currentUser ? (currentUser.id == currentChecklist.user_id ? undefined : ( followsRendered.find(c => c.id == currentChecklist.id) ? <button onClick={() => handleUnfollow()}>x</button> : <button onClick={() => handleFollow()}>+</button>  ) ) : undefined) : undefined}
                 <h1>{currentChecklist.title}</h1>
+            {loaded ? (currentUser ? (currentUser.id == currentChecklist.user_id ? undefined : ( followsRendered.find(c => c.id == currentChecklist.id) ? <button onClick={() => handleUnfollow()}>x</button> : <button onClick={() => handleFollow()}>+</button>  ) ) : undefined) : undefined}
                 {creator ? <h3>Created By: {creator.username}</h3> : undefined}
                 {renderChecklist}
                 </div>

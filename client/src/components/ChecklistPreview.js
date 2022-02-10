@@ -35,7 +35,8 @@ function ChecklistPreview({checklist, currentUser, followsRendered, setFollowsRe
             Tasks: {checklist.tasks.length}
             </div>
             <button onClick={() => window.location.assign(`http://localhost:4000/viewchecklist/${checklist.id}`)}>👁</button>
-            {loaded ? (currentUser ? (currentUser.id == checklist.user_id ? undefined : ( followsRendered.find(c => c.id == checklist.id) ? <button onClick={() => handleUnfollow()}>x</button> : <button onClick={() => handleFollow()}>+</button>  ) ) : undefined) : undefined}
+            {(currentUser ? (currentUser.id == checklist.user_id ? undefined : ( followsRendered.find(c => c.id == checklist.id) ? <button onClick={() => handleUnfollow()}>x</button> : <button onClick={() => handleFollow()}>+</button>  ) ) : undefined)}
+            {/* <button onClick={() => console.log(currentUser)}></button> */}
             {/* <button onClick={() => console.log(currentUser)}></button> */}
         </div>
     )

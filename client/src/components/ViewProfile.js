@@ -8,6 +8,9 @@ function ViewProfile({allUsers, setCurrentUser, currentUser}) {
     const [loaded, setLoaded] = useState(false)
     const [checklists, setChecklists] = useState([])
     const [renderChecklists, setRenderChecklists] = useState()
+    const [usersFollows, setUsersFollows] = useState(false)
+    const [followsLoaded, setFollowsLoaded] = useState([])
+    const [followsRendered, setFollowsRendered] = useState([])
     let {id} = useParams();
     const user = allUsers.find(u => u.id == id)
 
@@ -35,14 +38,36 @@ function ViewProfile({allUsers, setCurrentUser, currentUser}) {
             fetch(`http://localhost:3000/users/${id}/publiclists`)
             .then(resp => resp.json())
             .then(data => {setChecklists(data)
-                           setRenderChecklists(data.map(c => 
-                            <ChecklistPreview checklist={c} currentUser={currentUser}/>))})
+                        //    setRenderChecklists(data.map(c => 
+                        //     <ChecklistPreview setUsersFollows={setUsersFollows} checklist={c} currentUser={currentUser} followsRendered={followsRendered} setFollowsRendered={setFollowsRendered} usersFollows={usersFollows} loaded={loaded} setLoaded={setLoaded}/>))
+                    })
         }
 
     }
+
+    function checkFollows() {
+        if (currentUser == undefined){
+        console.log("no user yet")
+        } else if (followsLoaded==false ){
+            fetch(`http://localhost:3000/users/${currentUser.id}/checklistIFollow`)
+            .then(resp => resp.json())
+            .then(data => {setFollowsRendered(data)
+            })
+
+            fetch(`http://localhost:3000/users/${currentUser.id}/checklist_follows`)
+            .then(resp => resp.json())
+            .then(data => setUsersFollows(data))
+
+            setFollowsLoaded(true)
+        }
+    }
+    const renderLists = checklists.map(list => (
+        <ChecklistPreview setUsersFollows={setUsersFollows} checklist={list} currentUser={currentUser} followsRendered={followsRendered} setFollowsRendered={setFollowsRendered} usersFollows={usersFollows} loaded={loaded} setLoaded={setLoaded}/>
+    ))
     return (
         <div>
             {loadPage()}
+            {checkFollows()}
             {loaded ? <div >
                 <NavBar setCurrentUser={setCurrentUser} currentUser={currentUser}/>
                 <div className="ViewProfile">
@@ -50,7 +75,8 @@ function ViewProfile({allUsers, setCurrentUser, currentUser}) {
             {/* <button onClick={() => console.log(id)}></button> */}
             {/* {console.log("Test")} */}
             Public Checklists:
-            {renderChecklists ? renderChecklists : undefined}
+            {currentUser ? (renderLists ? renderLists : undefined) : undefined}
+            {/* <button onClick={() => console.log(currentUser)}></button> */}
             </div>
             </div> : undefined}
         </div>
