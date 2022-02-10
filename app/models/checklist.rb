@@ -1,5 +1,5 @@
 class Checklist < ApplicationRecord
-    has_many :tasks
+    has_many :tasks, dependent: :destroy
     has_many :sub_tasks, through: :tasks
     belongs_to :user
 

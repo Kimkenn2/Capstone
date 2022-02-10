@@ -20,6 +20,10 @@ class TasksController < ApplicationController
         task.update(task_params)
     end
 
+    def destroy
+        task = Task.find(params[:id])
+        task.destroy
+    end
 
     def task_params
         params.permit(:title, :index, :checklist_id)

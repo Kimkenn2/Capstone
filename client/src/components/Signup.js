@@ -30,6 +30,26 @@ function Signup ({setCurrentUser, currentUser}) {
         .then(res => {
             if(res.ok){
                 res.json().then(setCurrentUser)
+                .then(    fetch("/login", {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(user),
+                  })
+                  .then(resp => resp.json())
+                  .then((user) => {
+                      if(user.username == undefined) {
+                          setCurrentUser(undefined)
+                          window.alert("Invalid Credentials")
+                      } else {
+                      console.log(user);
+                      setCurrentUser(user);
+                      setUsername("")
+                      setPassword("")}
+                  })
+                  .then(() => window.location.assign(`http://localhost:4000/Profile`))
+                  )
             }
         })
         }
@@ -44,8 +64,8 @@ function Signup ({setCurrentUser, currentUser}) {
                     <input placeholder="Password" onChange={(e) => setPassword(e.target.value)}></input>
                     <button onClick={(e) => handleSignup(e)}>Sign Up</button>
                 </form>
-                    <button onClick={() => console.log(allUsers)}></button>
-                    <button onClick={() => console.log(allUsers[0].username)}></button>
+                    {/* <button onClick={() => console.log(allUsers)}></button>
+                    <button onClick={() => console.log(allUsers[0].username)}></button> */}
             </div>
         </div>
     )

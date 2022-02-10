@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :completed_subtasks
   resources :checklist_follows
   resources :completed_tasks
   resources :checklists
@@ -10,6 +11,7 @@ Rails.application.routes.draw do
   get '/signup', to: "users#create"
   get '/users/:id/checklists', to: "users#showChecklists"
   get '/users/:id/completedtasks', to: "users#showCompletedTasks"
+  get '/users/:id/completedsubtasks', to: "users#showCompleteSubTasks"
   get '/users/:id/publiclists', to: "users#showallpublic"
   get '/checklistspublic', to: "checklists#showPublic"
   get 'users/:id/checklist_follows', to: "users#showchecklistfollows"

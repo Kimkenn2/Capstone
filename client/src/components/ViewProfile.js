@@ -43,7 +43,7 @@ function ViewProfile({allUsers, setCurrentUser, currentUser}) {
     return (
         <div>
             {loadPage()}
-            {loaded ? <div>
+            {loaded ? <div >
                 <NavBar setCurrentUser={setCurrentUser} currentUser={currentUser}/>
                 <div className="ViewProfile">
             <h1>{user.username}'s Profile</h1>

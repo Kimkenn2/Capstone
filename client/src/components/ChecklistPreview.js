@@ -13,7 +13,7 @@ function ChecklistPreview({checklist, currentUser, followsRendered, setFollowsRe
             headers:{"Content-Type": "application/json"},
             body: JSON.stringify(data) 
         })
-        .then(window.location.reload())
+        .then(() => window.location.reload())
     }
 
     function handleUnfollow() {

@@ -18,6 +18,11 @@ class SubTasksController < ApplicationController
         subtask.update(subtask_params)
     end
 
+    def destroy
+        subtask = SubTask.find(params[:id])
+        subtask.destroy
+    end
+
 
     def subtask_params
         params.permit(:title, :task_index, :task_id, :checklist_id)

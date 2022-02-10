@@ -31,6 +31,11 @@ class UsersController < ApplicationController
       render json: completedtasks
     end
 
+    def showCompleteSubTasks
+      completedsubtasks = CompletedSubtask.where(user_id: params[:id])
+      render json: completedsubtasks
+    end
+
     def showallpublic
       checklistpublic = Checklist.where(public: true)
       checklists = checklistpublic.where(user_id: params[:id])

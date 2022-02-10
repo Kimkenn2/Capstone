@@ -21,7 +21,8 @@ function Profile({setChecklistTitle, checklistTitle, currentUser, setCurrentUser
     const [followedChecklistsIds, setFollowedChecklistsIds] = useState([])
     const [followedChecklists, setFollowedChecklists] = useState([])
 
-    function newChecklistClick() {
+    function newChecklistClick(e) {
+        e.preventDefault()
         const data = {
             title: checklistTitle,
             user_id: currentUser.id,
@@ -193,8 +194,10 @@ function Profile({setChecklistTitle, checklistTitle, currentUser, setCurrentUser
                     {renderWelcome()}
                     {loadFollowedChecklists()}
             {/* <button onClick={() => console.log(currentUser)}>Log CurrentUser</button> */}
-            <input placeholder='Insert Checklist Title' onChange={(e) => setChecklistTitle(e.target.value)}></input>
+            <form onSubmit={(e) => newChecklistClick(e)}>
+            <input placeholder='Insert New Checklist Title' onChange={(e) => setChecklistTitle(e.target.value)}></input>
             <button onClick={() => newChecklistClick()}>+</button>
+            </form>
 
             <div>
                 <h2>Your Checklists:</h2>
@@ -203,7 +206,7 @@ function Profile({setChecklistTitle, checklistTitle, currentUser, setCurrentUser
             <div>
                 <h2>Checklists You Follow:</h2>
                 {renderFollowedChecklists}
-                <button onClick={() => console.log(followedChecklists)}></button>
+                {/* <button onClick={() => console.log(followedChecklists)}></button> */}
                 
             </div>
                 </>
@@ -218,11 +221,11 @@ function Profile({setChecklistTitle, checklistTitle, currentUser, setCurrentUser
                 <button onClick={() => handleSubmitTask()}>Submit Task</button>
                 {/* {subTaskToggle ? <button>Submit SubTask</button> : undefined} */}
             </ul>
-            <button onClick={() => console.log(currentChecklist)}>testChecklist</button>
+            {/* <button onClick={() => console.log(currentChecklist)}>testChecklist</button>
             <button onClick={() => console.log(numberofCheckLists-1)}>index</button>
             <button onClick={() => console.log(listOfTasks)}>ListOfTasks</button>
             <button onClick={() => console.log(returnedSubmittedTask)}>RST</button>
-            <button onClick={() => console.log(currentListOfSubTasks)}>SubTasks</button>
+            <button onClick={() => console.log(currentListOfSubTasks)}>SubTasks</button> */}
                 <ul>
                     <label>SubTasks:</label>
                     {renderCurrentSubTasks}

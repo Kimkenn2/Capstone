@@ -30,9 +30,17 @@ class ChecklistsController < ApplicationController
         checklist = Checklist.find(params[:id])
         checklist.update(checklist_params)
     render json: checklist
-
-
     end
+
+
+    def destroy
+        checklist = Checklist.find(params[:id])
+        # checklistsubtasks = checklist.tasks.subtasks.destroy_all
+        # checklisttasks = checklist.tasks.destroy_all
+        checklistdelete = checklist.destroy
+        render json: checklistdelete
+    end
+
 
     def checklist_params
         params.permit(:title, :user_id, :public)
