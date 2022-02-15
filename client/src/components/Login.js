@@ -28,7 +28,8 @@ function handleLogin(e) {
           console.log(user);
           setCurrentUser(user);
           setUsername("")
-          setPassword("")}
+          setPassword("")
+          window.location.replace("http://localhost:4000/Profile")}
       })
 }
     return (

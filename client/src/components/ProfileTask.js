@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react"
 import ProfileSubTask from "./ProfileSubTask"
 
-function ProfileTask({task, currentUser}) {
+function ProfileTask({task, currentUser, owned}) {
     const [toggleSubTasks, setToggleSubTasks] = useState(false)
     const [currentTask, setCurrentTask] = useState([])
     const [renderSubTasks, setRenderSubTasks] = useState()
@@ -16,7 +16,7 @@ function ProfileTask({task, currentUser}) {
         .then(resp => resp.json())
         .then(taskData => {setCurrentTask(taskData)
                            setRenderSubTasks(taskData.sub_tasks.map(sub => 
-                            <ProfileSubTask subTask={sub} currentUser={currentUser}/>))
+                            <ProfileSubTask subTask={sub} currentUser={currentUser} owned={owned}/>))
         })
     },[])
 
@@ -96,10 +96,10 @@ function ProfileTask({task, currentUser}) {
             {/* {toggleSubTasks ? <button onClick={() => setToggleSubTasks(!toggleSubTasks)}>↑</button> : <button onClick={() => setToggleSubTasks(!toggleSubTasks)}>↓</button>} */}
             <>{ editMode ? <input type={"text"} value={title} onChange={(e) => setTitle(e.target.value)}/> : <>{title}</>}
             {renderSubTasksButton()}
-                <button onClick={() => {setShowOptions(!showOptions)
+                {owned ? <button onClick={() => {setShowOptions(!showOptions)
                                         setEditMode(false)
                                         setDeleteMode(false)
-                }}>⋮</button>
+                }}>⋮</button> : undefined}
                 {showOptions ? <div>
                     {deleteMode ? <>Are You Sure?</> : undefined}
                     {deleteMode ? <button onClick={() => handleDelete()}>Yes</button> : (editMode ? <button onClick={() => {setEditMode(false)

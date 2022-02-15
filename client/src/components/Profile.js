@@ -208,12 +208,14 @@ function Profile({setChecklistTitle, checklistTitle, currentUser, setCurrentUser
             <div>
                 <h2 className="titleText">Your Checklists:</h2>
                 <div className="yourChecklists">
-                {renderChecklists}
+                {yourChecklists.length ? renderChecklists : <h3 className="noFollowing">You Have No Checklists</h3>}
                 </div>
             </div>
             <div>
                 <h2 className="titleText">Checklists You Follow:</h2>
-                {renderFollowedChecklists}
+                <div className="yourChecklists">
+                {followedChecklists.length ? renderFollowedChecklists : <h3 className="noFollowing">You Follow No Checklists</h3>}
+                </div>
                 {/* <button onClick={() => console.log(followedChecklists)}></button> */}
                 
             </div>

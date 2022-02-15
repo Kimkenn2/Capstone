@@ -1,7 +1,7 @@
 
 import React, {useState, useEffect} from "react"
 
-function ProfileSubTask({subTask, currentUser}) {
+function ProfileSubTask({subTask, currentUser, owned}) {
     const [showOptions, setShowOptions] = useState(false)
     const [editMode, setEditMode] = useState(false)
     const [deleteMode, setDeleteMode] = useState(false)
@@ -71,10 +71,10 @@ function ProfileSubTask({subTask, currentUser}) {
             {completed ? <input type={"checkbox"} checked onClick={() => handleUndoTask()}/> : <input type={"checkbox"} onClick={() => handleCompleteTask()}/>}
             <>{ editMode ? <input type={"text"} value={title} onChange={(e) => setTitle(e.target.value)}/> : <>{title}</>}
             {/* {renderSubTasksButton()} */}
-                <button onClick={() => {setShowOptions(!showOptions)
+                {owned ? <button onClick={() => {setShowOptions(!showOptions)
                                         setEditMode(false)
                                         setDeleteMode(false)
-                }}>⋮</button>
+                }}>⋮</button> : undefined }
                 {showOptions ? <div>
                     {deleteMode ? <>Are You Sure?</> : undefined}
                     {deleteMode ? <button onClick={() => handleDelete()}>Yes</button> : (editMode ? <button onClick={() => {setEditMode(false)

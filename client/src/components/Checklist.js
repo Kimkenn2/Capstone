@@ -36,7 +36,7 @@ function Checklist({list, currentUser, owned, usersFollows, setDidLoadFollowedCh
     }
 
     const tasks = list.tasks.map(task => 
-        <ProfileTask task={task} currentUser={currentUser}/>)
+        <ProfileTask task={task} currentUser={currentUser} owned={owned}/>)
 
         function handleUnfollow() {
             const targetedUnfollow = usersFollows.find(f => f.checklist_id == list.id && f.user_id == currentUser.id).id
