@@ -52,7 +52,9 @@ function BrowseChecklists({currentUser, setCurrentUser}) {
             <NavBar setCurrentUser={setCurrentUser} currentUser={currentUser}/>
             <div className="BrowseChecklists">
                 <input placeholder="Search Lists" onChange={(e) => setSearch(e.target.value)}></input>
+                <div className="listPreviewContainer">
             {renderLists ? renderLists : undefined}
+                </div>
             </div>
         </div>
     )

@@ -134,7 +134,7 @@ function Profile({setChecklistTitle, checklistTitle, currentUser, setCurrentUser
             console.log("no user")
         } else {
             // console.log(currentUser.username)
-            return(<div>Welcome, {currentUser.username}</div>)
+            return(<div className="titleText">Welcome, {currentUser.username}</div>)
         }
     }
     function loadChecklists() {
@@ -206,11 +206,13 @@ function Profile({setChecklistTitle, checklistTitle, currentUser, setCurrentUser
             </form>
 
             <div>
-                <h2>Your Checklists:</h2>
+                <h2 className="titleText">Your Checklists:</h2>
+                <div className="yourChecklists">
                 {renderChecklists}
+                </div>
             </div>
             <div>
-                <h2>Checklists You Follow:</h2>
+                <h2 className="titleText">Checklists You Follow:</h2>
                 {renderFollowedChecklists}
                 {/* <button onClick={() => console.log(followedChecklists)}></button> */}
                 

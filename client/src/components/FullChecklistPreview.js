@@ -91,7 +91,10 @@ function FullChecklistPreview({setCurrentUser, currentUser}) {
                 <h1>{currentChecklist.title}</h1>
             {loaded ? (currentUser ? (currentUser.id == currentChecklist.user_id ? undefined : ( followsRendered.find(c => c.id == currentChecklist.id) ? <button onClick={() => handleUnfollow()}>x</button> : <button onClick={() => handleFollow()}>+</button>  ) ) : undefined) : undefined}
                 {creator ? <h3>Created By: {creator.username}</h3> : undefined}
+                <div className="previewChecklist">
                 {renderChecklist}
+                </div>
+                    
                 </div>
                 </div> : undefined}
         </div>

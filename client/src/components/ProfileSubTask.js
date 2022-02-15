@@ -67,7 +67,7 @@ function ProfileSubTask({subTask, currentUser}) {
      .then(() => window.location.reload())
      }
     return (
-        <div>
+        <div className="profileSubTask">
             {completed ? <input type={"checkbox"} checked onClick={() => handleUndoTask()}/> : <input type={"checkbox"} onClick={() => handleCompleteTask()}/>}
             <>{ editMode ? <input type={"text"} value={title} onChange={(e) => setTitle(e.target.value)}/> : <>{title}</>}
             {/* {renderSubTasksButton()} */}

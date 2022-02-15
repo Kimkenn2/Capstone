@@ -53,21 +53,21 @@ function Checklist({list, currentUser, owned, usersFollows, setDidLoadFollowedCh
                 <button onClick={() => {setShowOptions(!showOptions)
                                         setEditMode(false)
                                         setDeleteMode(false)
-                }}>⋮</button>
-                {showOptions ? <div>
+                } }className="initOptions">⋮</button>
+                {showOptions ? <div className="options">
                     {(currentUser.id == list.user_id) ? <>
                     {deleteMode ? <>Are You Sure?</> : undefined}
-                    {deleteMode ? <button onClick={() => handleDelete()}>Yes</button> : (editMode ? <button onClick={() => {setEditMode(false)
+                    {deleteMode ? <button onClick={() => handleDelete()} className="optionsButtons">Yes</button> : (editMode ? <button onClick={() => {setEditMode(false)
                                                         setTitle(list.title)
-                    }}>Cancel</button> : <button onClick={() => setEditMode(!editMode)}>Edit</button>)}
-                    {deleteMode ? <button onClick={() => setDeleteMode(false)}>No</button> : (editMode ? <button onClick={() => handleEditSubmit()}>Submit</button> : <button onClick={() => setDeleteMode(true)}>Delete</button>)}
-                    </> : <button onClick={() => handleUnfollow()}>Unfollow</button>}
+                    }} className="optionsButtons">Cancel</button> : <button onClick={() => setEditMode(!editMode)} className="optionsButtons">Edit</button>)}
+                    {deleteMode ? <button onClick={() => setDeleteMode(false)} className="optionsButtons">No</button> : (editMode ? <button className="optionsButtons" onClick={() => handleEditSubmit()}>Submit</button> : <button onClick={() => setDeleteMode(true)} className="optionsButtons">Delete</button>)}
+                    </> : <button onClick={() => handleUnfollow()} className="optionsButtons">Unfollow</button>}
                 </div> : undefined }
             </div>
             {/* {owned ? <button onClick={() => window.location.assign(`http://localhost:4000/editchecklist/${list.id}`)}>Edit</button> : undefined } */}
             
             {view ? <button onClick={() => handleViewCancel()}>Cancel</button> : <button onClick={() => handleViewCancel()}>View</button>}
-            {view ? <div>
+            {view ? <div className="taskContainer">
                 {tasks}
             </div> : undefined}
         </div>

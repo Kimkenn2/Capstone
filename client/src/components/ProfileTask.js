@@ -90,7 +90,7 @@ function ProfileTask({task, currentUser}) {
      .then(() => window.location.reload())
      }
     return(
-        <div>
+        <div className="profileTask">
             {completed ? <input type={"checkbox"} checked onClick={() => handleUndoTask()}/> : <input type={"checkbox"} onClick={() => handleCompleteTask()}/>}
             {/* {task.title} */}
             {/* {toggleSubTasks ? <button onClick={() => setToggleSubTasks(!toggleSubTasks)}>↑</button> : <button onClick={() => setToggleSubTasks(!toggleSubTasks)}>↓</button>} */}
@@ -109,7 +109,7 @@ function ProfileTask({task, currentUser}) {
                 </div> : undefined }
             </>
             {/* <button onClick={() => console.log(currentTask.sub_tasks)}>log subtasks</button> */}
-            {toggleSubTasks ? <ul>
+            {toggleSubTasks ? <ul className="subTaskContainer">
                {renderSubTasks}
             </ul> : undefined}
             {/* <button onClick={() => console.log(currentTask.sub_tasks)}></button> */}

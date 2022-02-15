@@ -4,7 +4,7 @@
 function SubTaskPreview({subTask}) {
 
     return (
-        <div>
+        <div className="subTaskPreview">
         - {subTask.title}
         </div>
     )

@@ -56,10 +56,11 @@ function Signup ({setCurrentUser, currentUser}) {
         
     }
     return (
-        <div>
+        <div className="signupPage">
             <NavBar setCurrentUser={setCurrentUser} currentUser={currentUser}/>
-            <div className="Login">
-                <form className="LoginForm">
+            <div className="Signup">
+                <form className="SignupForm">
+                    <h2 className="signupFormText">Signup to Start Creating Checklists!</h2>
                     <input placeholder="Username" onChange={(e) => setUsername(e.target.value)}></input>
                     <input placeholder="Password" onChange={(e) => setPassword(e.target.value)}></input>
                     <button onClick={(e) => handleSignup(e)}>Sign Up</button>

@@ -15,7 +15,7 @@ function NavBar({setCurrentUser, currentUser}) {
         <div>
             {currentUser ? <div className="mainNavDiv">
              <div className="navLogoDiv">
-                <Link to= "/" className="navBarLink">Home</Link>
+                {/* <Link to= "/" className="navBarLink">Home</Link> */}
             </div>
             <ul className="navBarUl">
                 <Link to="/Profile" className="navBarLink">{currentUser.username}</Link>
@@ -26,7 +26,7 @@ function NavBar({setCurrentUser, currentUser}) {
             </ul>
         </div> : <div className="mainNavDiv">
              <div className="navLogoDiv">
-                <Link to= "/" className="navBarLink">Home</Link>
+                {/* <Link to= "/" className="navBarLink">Home</Link> */}
             </div>
             <ul className="navBarUl">
                 <Link to ="/Login" className="navBarLink">Login</Link>

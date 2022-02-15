@@ -32,10 +32,11 @@ function handleLogin(e) {
       })
 }
     return (
-        <div>
+        <div className="signupPage">
             <NavBar setCurrentUser={setCurrentUser} currentUser={currentUser}/>
             <div className="Login">
                 <form className="LoginForm">
+                    <div className="loginFormText">Login</div>
                     <input placeholder="Username" onChange={(e) => setUsername(e.target.value)}></input>
                     <input placeholder="Password" onChange={(e) => setPassword(e.target.value)}></input>
                     <button onClick={(e) => handleLogin(e)}>Login</button>

@@ -75,7 +75,9 @@ function ViewProfile({allUsers, setCurrentUser, currentUser}) {
             {/* <button onClick={() => console.log(id)}></button> */}
             {/* {console.log("Test")} */}
             Public Checklists:
+            <div className="listPreviewContainer">
             {currentUser ? (renderLists ? renderLists : undefined) : undefined}
+            </div>
             {/* <button onClick={() => console.log(currentUser)}></button> */}
             </div>
             </div> : undefined}

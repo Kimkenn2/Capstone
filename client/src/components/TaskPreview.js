@@ -24,12 +24,12 @@ function TaskPreview({task, currentUser}) {
         }
     }
     return(
-        <div>
+        <div className="taskPreview">
             {task.title}
             {renderSubTasksButton()}
-            {toggleSubTasks ? <ul>
+            {toggleSubTasks ? <div>
                {renderSubTasks}
-            </ul> : undefined}
+            </div> : undefined}
         </div>
     )
 }
