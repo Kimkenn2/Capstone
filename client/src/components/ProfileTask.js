@@ -91,7 +91,7 @@ function ProfileTask({task, currentUser, owned}) {
      }
     return(
         <div className="profileTask">
-            {completed ? <input type={"checkbox"} checked onClick={() => handleUndoTask()}/> : <input type={"checkbox"} onClick={() => handleCompleteTask()}/>}
+            {editMode ? undefined : (completed ? <input type={"checkbox"} checked onClick={() => handleUndoTask()}/> : <input type={"checkbox"} onClick={() => handleCompleteTask()}/>)}
             {/* {task.title} */}
             {/* {toggleSubTasks ? <button onClick={() => setToggleSubTasks(!toggleSubTasks)}>↑</button> : <button onClick={() => setToggleSubTasks(!toggleSubTasks)}>↓</button>} */}
             <>{ editMode ? <input type={"text"} value={title} onChange={(e) => setTitle(e.target.value)}/> : <>{title}</>}
@@ -99,13 +99,13 @@ function ProfileTask({task, currentUser, owned}) {
                 {owned ? <button onClick={() => {setShowOptions(!showOptions)
                                         setEditMode(false)
                                         setDeleteMode(false)
-                }}>⋮</button> : undefined}
-                {showOptions ? <div>
+                }} className="initOptions">⋮</button> : undefined}
+                {showOptions ? <div className="options">
                     {deleteMode ? <>Are You Sure?</> : undefined}
-                    {deleteMode ? <button onClick={() => handleDelete()}>Yes</button> : (editMode ? <button onClick={() => {setEditMode(false)
+                    {deleteMode ? <button onClick={() => handleDelete()} className="optionsButtons">Yes</button> : (editMode ? <button onClick={() => {setEditMode(false)
                                                         setTitle(task.title)
-                    }}>Cancel</button> : <button onClick={() => setEditMode(!editMode)}>Edit</button>)}
-                    {deleteMode ? <button onClick={() => setDeleteMode(false)}>No</button> : (editMode ? <button onClick={() => handleEditSubmit()}>Submit</button> : <button onClick={() => setDeleteMode(true)}>Delete</button>)}
+                    }} className="optionsButtons">Cancel</button> : <button onClick={() => setEditMode(!editMode)} className="optionsButtons">Edit</button>)}
+                    {deleteMode ? <button onClick={() => setDeleteMode(false)} className="optionsButtons">No</button> : (editMode ? <button onClick={() => handleEditSubmit()} className="optionsButtons">Submit</button> : <button onClick={() => setDeleteMode(true)} className="optionsButtons">Delete</button>)}
                 </div> : undefined }
             </>
             {/* <button onClick={() => console.log(currentTask.sub_tasks)}>log subtasks</button> */}

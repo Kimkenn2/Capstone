@@ -46,7 +46,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<HomePage checklistTitle={checklistTitle} setChecklistTitle={setChecklistTitle} currentUser={currentUser} setCurrentUser={setCurrentUser}/>} />
+          <Route path="/" element={<Signup currentUser={currentUser} setCurrentUser={setCurrentUser}/>} />
           <Route path="/Login" element={<Login currentUser={currentUser} setCurrentUser={setCurrentUser}/>} />
           <Route path="/CreateList" element={<CreateChecklist setCurrentUser={setCurrentUser} currentUser={currentUser}/>} />
           <Route path="/Profile" element={<Profile checklistTitle={checklistTitle} setChecklistTitle={setChecklistTitle} currentUser={currentUser} setCurrentUser={setCurrentUser}/>} />
