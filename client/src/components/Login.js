@@ -39,7 +39,7 @@ function handleLogin(e) {
                 <form className="LoginForm">
                     <div className="loginFormText">Login</div>
                     <input placeholder="Username" onChange={(e) => setUsername(e.target.value)}></input>
-                    <input placeholder="Password" onChange={(e) => setPassword(e.target.value)}></input>
+                    <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}></input>
                     <button onClick={(e) => handleLogin(e)}>Login</button>
                 </form>
             </div>

@@ -59,10 +59,9 @@ function Profile({setChecklistTitle, checklistTitle, currentUser, setCurrentUser
 
     const renderCurrentChecklist = 
         listOfTasks ? listOfTasks.map(task => (
-            <div> - {task.title} <ul>{task.sub_tasks.map( sT => (
+            <div className="creatingOneTask"> - {task.title} <ul className="creatingSubTasks">{task.sub_tasks.map( sT => (
                 <div>-- {sT.title}</div>
-            )) }</ul><button onClick={() => console.log(task.sub_tasks)}>SubTasks</button>
-            <div>----</div></div> 
+            )) }</ul></div> 
         )) : undefined
     
     const renderCurrentSubTasks =
@@ -201,8 +200,8 @@ function Profile({setChecklistTitle, checklistTitle, currentUser, setCurrentUser
                     {loadFollowedChecklists()}
             {/* <button onClick={() => console.log(currentUser)}>Log CurrentUser</button> */}
             <form onSubmit={(e) => newChecklistClick(e)}>
-            <input placeholder='Insert New Checklist Title' onChange={(e) => setChecklistTitle(e.target.value)}></input>
-            <button onClick={() => newChecklistClick()}>+</button>
+            <input className="createChecklistInput" placeholder='Insert New Checklist Title' onChange={(e) => setChecklistTitle(e.target.value)}></input>
+            <button onClick={() => newChecklistClick()} className="createChecklistButton">+</button>
             </form>
 
             <div>
@@ -223,24 +222,24 @@ function Profile({setChecklistTitle, checklistTitle, currentUser, setCurrentUser
             )
         } else {
             return(
-                <>
-                <ul className="createList">
+                <div className="createEntireList">
+                <div className="createList">
                     <div bold="true">{checklistTitle}</div>
             <div>Number of Tasks: {numberofCheckLists-2}</div>
                 {renderTask()}
                 <button onClick={() => handleSubmitTask()}>Submit Task</button>
                 {/* {subTaskToggle ? <button>Submit SubTask</button> : undefined} */}
+            <ul>
+                <label>SubTasks:</label>
+                {renderCurrentSubTasks}
             </ul>
+            </div>
             {/* <button onClick={() => console.log(currentChecklist)}>testChecklist</button>
             <button onClick={() => console.log(numberofCheckLists-1)}>index</button>
             <button onClick={() => console.log(listOfTasks)}>ListOfTasks</button>
             <button onClick={() => console.log(returnedSubmittedTask)}>RST</button>
             <button onClick={() => console.log(currentListOfSubTasks)}>SubTasks</button> */}
-                <ul>
-                    <label>SubTasks:</label>
-                    {renderCurrentSubTasks}
-                </ul>
-                <ul>
+                <ul className="creatingTasks">
                     <label>Tasks:</label>
                 {renderCurrentChecklist}
                 </ul>
@@ -249,7 +248,7 @@ function Profile({setChecklistTitle, checklistTitle, currentUser, setCurrentUser
                     <input type={"checkbox"} onClick={() => handlePublic()}></input>
                     <button onClick={() => onComplete()}>Complete</button>
                 </div>
-                </>
+                </div>
             )
         }
     }

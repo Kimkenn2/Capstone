@@ -71,10 +71,10 @@ function ViewProfile({allUsers, setCurrentUser, currentUser}) {
             {loaded ? <div >
                 <NavBar setCurrentUser={setCurrentUser} currentUser={currentUser}/>
                 <div className="ViewProfile">
-            <h1>{user.username}'s Profile</h1>
+            <h1 className="titleText">{user.username}'s Profile</h1>
             {/* <button onClick={() => console.log(id)}></button> */}
             {/* {console.log("Test")} */}
-            Public Checklists:
+            <h3 className="titleText">Public Checklists:</h3>
             <div className="listPreviewContainer">
             {currentUser ? (renderLists ? renderLists : undefined) : undefined}
             </div>

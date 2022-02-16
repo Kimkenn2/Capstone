@@ -62,7 +62,7 @@ function Signup ({setCurrentUser, currentUser}) {
                 <form className="SignupForm">
                     <h2 className="signupFormText">Signup to Start Creating Checklists!</h2>
                     <input placeholder="Username" onChange={(e) => setUsername(e.target.value)}></input>
-                    <input placeholder="Password" onChange={(e) => setPassword(e.target.value)}></input>
+                    <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}></input>
                     <button onClick={(e) => handleSignup(e)}>Sign Up</button>
                 </form>
                     {/* <button onClick={() => console.log(allUsers)}></button>
